@@ -1,0 +1,8 @@
+{
+  "name": "Remix RetinaReach",
+  "description": "AI-assisted retinal screening platform for rural and underserved community health camps with role-based access, risk classification, and ophthalmologist referrals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

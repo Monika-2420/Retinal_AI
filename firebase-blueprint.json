@@ -1,0 +1,132 @@
+{
+  "entities": {
+    "users": {
+      "title": "Users",
+      "description": "User profiles for health workers, doctors, and admins.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "full_name": { "type": "string" },
+        "role": { "type": "string", "enum": ["health_worker", "doctor", "admin"] },
+        "phone": { "type": "string" },
+        "health_center_name": { "type": "string" },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" }
+      },
+      "required": ["id", "email", "full_name", "role", "health_center_name"]
+    },
+    "patients": {
+      "title": "Patients",
+      "description": "Patients screened during rural outreach camps.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "patient_id_code": { "type": "string" },
+        "full_name": { "type": "string" },
+        "age": { "type": "number" },
+        "gender": { "type": "string" },
+        "phone": { "type": "string" },
+        "location": { "type": "string" },
+        "diabetes_status": { "type": "string" },
+        "duration_of_diabetes_years": { "type": "number" },
+        "blood_sugar_value": { "type": "number" },
+        "hba1c_percentage": { "type": "number" },
+        "additional_notes": { "type": "string" },
+        "created_by": { "type": "string" },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" }
+      },
+      "required": ["id", "patient_id_code", "full_name", "age", "gender", "location"]
+    },
+    "screenings": {
+      "title": "Screenings",
+      "description": "Fundus photography screening events for patients.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "patient_id": { "type": "string" },
+        "eye_side": { "type": "string" },
+        "image_url": { "type": "string" },
+        "image_filename": { "type": "string" },
+        "image_size_bytes": { "type": "number" },
+        "image_resolution": { "type": "string" },
+        "status": { "type": "string" },
+        "screened_by": { "type": "string" },
+        "health_camp_location": { "type": "string" },
+        "notes": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "patient_id", "eye_side", "image_url", "status", "created_at"]
+    },
+    "screening_results": {
+      "title": "Screening Results",
+      "description": "AI model inference results and ophthalmologist reviews for screenings.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "screening_id": { "type": "string" },
+        "dr_stage": { "type": "string" },
+        "risk_category": { "type": "string" },
+        "confidence_score": { "type": "number" },
+        "recommendation": { "type": "string" },
+        "detected_features": { "type": "array", "items": { "type": "string" } },
+        "raw_ai_response": { "type": "object" },
+        "is_mock_service": { "type": "boolean" },
+        "reviewed_by_doctor": { "type": "boolean" },
+        "doctor_notes": { "type": "string" },
+        "doctor_override_risk": { "type": "string" },
+        "doctor_override_stage": { "type": "string" },
+        "doctor_override_reason": { "type": "string" },
+        "reviewed_by_doctor_id": { "type": "string" },
+        "reviewed_by_doctor_name": { "type": "string" },
+        "reviewed_at": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "screening_id", "dr_stage", "risk_category", "confidence_score", "created_at"]
+    },
+    "referrals": {
+      "title": "Referrals",
+      "description": "Hospital referrals for patients identified with diabetic retinopathy.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "screening_id": { "type": "string" },
+        "patient_id": { "type": "string" },
+        "reason": { "type": "string" },
+        "recommended_care_level": { "type": "string" },
+        "urgency": { "type": "string" },
+        "referral_status": { "type": "string" },
+        "target_facility": { "type": "string" },
+        "notes": { "type": "string" },
+        "referred_by": { "type": "string" },
+        "referral_date": { "type": "string" },
+        "appointment_date": { "type": "string" },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" }
+      },
+      "required": ["id", "screening_id", "patient_id", "reason", "referral_status", "target_facility"]
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Real-time alerts for high-risk patients and referral status updates.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "recipient_role": { "type": "string" },
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "patient_id": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "screening_id": { "type": "string" },
+        "referral_id": { "type": "string" },
+        "risk_category": { "type": "string" },
+        "read": { "type": "boolean" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "type", "title", "message", "created_at"]
+    }
+  }
+}

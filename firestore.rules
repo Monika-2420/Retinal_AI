@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to validate ID strings
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Patients collection
+    match /patients/{patientId} {
+      allow read, write: if true;
+    }
+
+    // Screenings collection
+    match /screenings/{screeningId} {
+      allow read, write: if true;
+    }
+
+    // Screening results collection (AI predictions & doctor reviews)
+    match /screening_results/{resultId} {
+      allow read, write: if true;
+    }
+
+    // Referrals collection
+    match /referrals/{referralId} {
+      allow read, write: if true;
+    }
+
+    // Notifications collection for real-time alerts
+    match /notifications/{notificationId} {
+      allow read, write: if true;
+    }
+  }
+}
